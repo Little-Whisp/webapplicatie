@@ -1,48 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Laravel 8 CRUD with Image Upload Example from scratch - ItSolutionStuff.com</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-success" href="{{ route('artworks.create') }}"> Create New Product</a>
+            </div>
+        </div>
+    </div>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('My posts') }}</div>
-                    <div class="card-body">
-                        <table class="table">
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 
-                            <div class="pull-right">
-                                <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
-                            </div>
+    <table class="table table-bordered">
+        <tr>
+            <th>No</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th width="280px">Action</th>
+        </tr>
+        @foreach ($artworks as $artwork)
+            <tr>
+                <td>{{ ++$i }}</td>
+                <td><img src="/image/{{ $artwork->image }}" width="100px"></td>
+                <td>{{ $artwork->name }}</td>
+                <td>{{ $artwork->detail }}</td>
+                <td>
+                    <form action="{{ route('artworks.destroy',$artwork->id) }}" method="POST">
 
-                            <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>File</th>
-                            <tr>
-                            </thead>
-                            <tbody>
-                            @foreach( $posts as $post)
+                        <a class="btn btn-info" href="{{ route('artworks.show',$product->id) }}">Show</a>
 
-{{--                                    <div class="row row-cols-1 row-cols-md-3 g-3">--}}
-{{--                                        <div class="row row-cols-1 row-cols-md-3 g-3">--}}
-{{--                                            <div class="card">--}}
-{{--                                                <img src="storage/app/public/artwork" alt="{{$post->file_path}}">--}}
-{{--                                                <tr>--}}
-                                                    <td>{{$post->name}}<td/>
-                                                    <td><img src="={{$post->file_path}}"></td>
+                        <a class="btn btn-primary" href="{{ route('artworks.edit',$product->id) }}">Edit</a>
 
-                                                    @if (Auth::user() && Auth::user()->role == 'admin')
-                                                    <td>
-                                                        <a class="btn btn-primary" href="{{ route('posts.edit', [$post->id]) }}">  Edit</a>
+                        @csrf
+                        @method('DELETE')
 
-                                                        <a class="btn btn-primary" href="{{ route('posts.delete', [$post->id]) }}">Delete</a>
-                                                    </td>
-                                                </tr>
-                                            <div>
-                                                     @endif
-                            @endforeach
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </table>
 
-                            </tbody>
-                        </table>
-                    </div>
+    {!! $products->links() !!}
+
 @endsection
+

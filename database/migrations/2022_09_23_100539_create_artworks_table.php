@@ -17,7 +17,8 @@ return new class extends Migration
         Schema::create('artworks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('file_path');
+            $table->text('detail');
+            $table->float('image');
             $table->timestamps();
         });
 

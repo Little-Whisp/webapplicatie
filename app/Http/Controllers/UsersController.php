@@ -18,7 +18,6 @@ class UsersController extends Controller
     {
         $users = Users::select('id', 'name', 'email')->get();
         return view('users.index', compact('users'));
-
     }
 
     public function create(){

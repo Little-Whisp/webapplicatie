@@ -22,10 +22,6 @@
                             </div>
                             @endif
 
-{{--                            <div>--}}
-{{--                            <a href="{{ route('create') }}">Make request</a>--}}
-{{--                            </div>--}}
-
                             @if (Auth::user() && Auth::user()->role == 'admin')
 
                             <div>

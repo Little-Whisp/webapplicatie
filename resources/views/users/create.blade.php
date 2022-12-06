@@ -1,52 +1,54 @@
-{{--@extends('layouts.app')--}}
+@extends('layouts.app')
 
-{{--@section('content')--}}
-{{--    <div class="container">--}}
-{{--        <div class="row justify-content-center">--}}
-{{--            <div class="col-md-8">--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-header">{{ __('Make Request') }}</div>--}}
-{{--        <div class="card-body">--}}
+@section('content')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Add new artwork</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('artworks.posts') }}"> Back</a>
+            </div>
+        </div>
+    </div>
 
-{{--            <form action="{{ url('create') }}" method="post">--}}
-{{--                {!! csrf_field() !!}--}}
-{{--                <label>Title</label></br>--}}
-{{--                <input type="text" name="title" id="title" class="form-control"></br>--}}
-{{--                <label>Description</label></br>--}}
-{{--                <input type="text" name="description" id="description" class="form-control"></br>--}}
-{{--                <input type="submit" value="Save" class="btn btn-success"></br>--}}
-{{--            </form>--}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-{{--        </div>--}}
-{{--    </div>--}}
+    <form action="{{ route('artworks.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
-{{--<body>--}}
-{{--<!-- if validation in the controller fails, show the errors -->--}}
-{{--@if ($errors->any())--}}
-{{--    <div class="alert alert-danger">--}}
-{{--        <ul>--}}
-{{--            @foreach ($errors->all() as $error)--}}
-{{--                <li>{{ $error }}</li>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-{{--@endif--}}
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Name:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="Name">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Detail:</strong>
+                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Image:</strong>
+                    <input type="file" name="image" class="form-control" placeholder="image">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
 
-{{--<div>--}}
-
-{{--    <form action="{{ route('artwork.store') }}" method="post" enctype="multipart/form-data">--}}
-{{--        <!-- Add CSRF Token -->--}}
-{{--        @csrf--}}
-{{--        <div class="form-group">--}}
-{{--            <label>Artwork Name</label>--}}
-{{--            <input type="text" class="form-control" name="title" required>--}}
-{{--        </div>--}}
-{{--        <div class="form-group">--}}
-{{--            <input type="file" name="file" required>--}}
-{{--        </div>--}}
-{{--        <button type="submit">Submit</button>--}}
-{{--    </form>--}}
-
-{{--</div>--}}
-{{--</body>--}}
-{{--@endsection--}}
+    </form>
+@endsection
