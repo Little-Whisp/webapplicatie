@@ -7,35 +7,22 @@ use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
-        $Artworks = Artwork::latest()->paginate(5);
+        $artworks = Artwork::latest()->paginate(5);
+        return view('home', compact('artworks',))->with('i', (request()->input('page', 1) - 1) * 5);
 
-        return view('artworks.index',compact('artworks'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('artworks.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -55,39 +42,23 @@ class ArtworkController extends Controller
 
         Artwork::create($input);
 
-        return redirect()->route('artworks.index')
-            ->with('success','Artwork created successfully.');
+        return redirect()->route('home')
+            ->with('success', 'Artwork created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Artwork  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Artwork $product)
+
+    public function view(Artwork $artwork)
     {
-        return view('artworks.show',compact('artwork'));
+        return view('artworks.view', compact('artwork'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Artwork  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
+
+    public function edit(Artwork $artwork)
     {
-        return view('artworks.edit',compact('artwork'));
+        return view('artworks.edit', compact('artwork'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Artwork  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Artwork $artwork)
     {
         $request->validate([
@@ -102,27 +73,24 @@ class ArtworkController extends Controller
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
-        }else{
+        } else {
             unset($input['image']);
         }
 
         $artwork->update($input);
 
-        return redirect()->route('artworks.index')
-            ->with('success','Artworks updated successfully');
+        return redirect()->route('home')
+            ->with('success', 'Artworks updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Artwork  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Artwork $artwork)
-    {
-        $artwork->delete();
 
-        return redirect()->route('artworks.index')
-            ->with('success','Product deleted successfully');
+    public function destroy($id)
+
+    {
+        Artwork::destroy($id);
+        return redirect('home')->with('flash_message', 'Artwork deleted!');
+
     }
 }
+
+

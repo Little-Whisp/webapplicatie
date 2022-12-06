@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if (Auth::user() && Auth::user()->role == 'admin')
+{{--            @if (Auth::user() && Auth::user()->role == 'admin')--}}
                 <div>'THIS IS WHAT I WANT ONLY ADMIN USERS TO SEE!'</div>
             <div class="card">
                 <div class="card-header">{{ __('User Requests') }}</div>
@@ -28,12 +29,7 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('view') }}">View request</a>
 
-
-{{--                        <a href="{{ route('edit') }}">Edit request</a>--}}
-
-                        <a class="btn btn-primary" href="{{ route('posts.delete', [$user->id]) }}">Delete</a>
                     </td>
                 </tr>
             @endforeach
@@ -42,7 +38,6 @@
             </tbody>
         </table>
     </div>
-
-@endif
+                {--@endif--}}
 
 @endsection

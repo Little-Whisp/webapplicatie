@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
+    <div class="container">
+        <div class="row justify-content-center">
             <div class="pull-left">
                 <h2>Edit Product</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
             </div>
-        </div>
-    </div>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -23,7 +21,7 @@
         </div>
     @endif
 
-    <form action="{{ route('products.update',$product->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('artworks.update',$artwork->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -31,7 +29,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $Artwork->name }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" value="{{ $artwork->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -52,5 +50,10 @@
             </div>
         </div>
 
+
     </form>
+
+        </div>
+    </div>
+
 @endsection

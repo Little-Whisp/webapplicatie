@@ -1,41 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Art Gallery') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        {{ __('You are logged in!') }}
-
-                            @if (Auth::user() && Auth::user()->role == 'admin')
-                            <div>
-                        <a href="{{ route('users') }}">Go to user list</a>
-                            </div>
-                            @endif
-
-                            @if (Auth::user() && Auth::user()->role == 'admin')
-
-                            <div>
-                                <a href="{{ route('artwork') }}">Upload art</a>
-                            </div>
-                            @endif
-
-                            <div>
-                                <a href="{{ route('posts') }}">Posts</a>
-                            </div>
-
-
-                    </div>
-                </div>
+            <div class="pull-left">
+                <h2>Laravel 8 CRUD with Image Upload Example from scratch - ItSolutionStuff.com</h2>
             </div>
+            <div class="pull-right">
+                <a class="btn btn-success" href="{{ route('artworks.create') }}"> Create New Product</a>
+                <a class="btn btn-success" href="{{ route('users') }}"> View users</a>
+    </div>
+
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
         </div>
+    @endif
+
+    <table class="table table-bordered">
+        <tr>
+            <th>No</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th width="280px">Action</th>
+        </tr>
+        @foreach ($artworks as $artwork)
+            <tr>
+                <td>{{ ++$i }}</td>
+                <td><img src="/image/{{ $artwork->image }}" width="100px"></td>
+                <td>{{ $artwork->name }}</td>
+                <td>{{ $artwork->detail }}</td>
+                <td>
+
+                    <a class="btn btn-primary" href="{{ route('artworks.destroy', [$artwork->id]) }}">Delete</a>
+
+                        <a class="btn btn-info" href="{{ route('artworks.view',$artwork->id) }}">Show</a>
+
+                        <a class="btn btn-primary" href="{{ route('artworks.edit',$artwork->id) }}">Edit</a>
+
+                </td>
+            </tr>
+
+        @endforeach
+        </div>
+    </div>
+    </table>
+
+    {!! $artworks->links() !!}
+
 @endsection
