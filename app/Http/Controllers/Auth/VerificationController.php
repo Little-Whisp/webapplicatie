@@ -22,7 +22,7 @@ class VerificationController extends Controller
     use VerifiesEmails;
 
     /**
-     * Where to redirect libary after verification.
+     * Where to redirect library after verification.
      *
      * @var string
      */

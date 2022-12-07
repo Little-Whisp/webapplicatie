@@ -17,16 +17,16 @@ class UsersController extends Controller
     public function index()
     {
         $users = Users::select('id', 'name', 'email')->get();
-        return view('libary.index', compact('users'));
+        return view('library.users', compact('users'));
     }
 
-    public function create(){
-        return view('libary.create');
-    }
-
-    public function delete(){
-        return view('libary.create');
-    }
+//    public function create(){
+//        return view('library.create');
+//    }
+//
+//    public function delete(){
+//        return view('library.create');
+//    }
 
 //    public function store(Request $request){
 //        $request -> Validator ([

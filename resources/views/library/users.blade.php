@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('content')
 
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
 {{--            @if (Auth::user() && Auth::user()->role == 'admin')--}}
-                <div>'THIS IS WHAT I WANT ONLY ADMIN USERS TO SEE!'</div>
-            <div class="card">
-                <div class="card-header">{{ __('User Requests') }}</div>
-                <div class="card-body">
-        <table class="table">
+{{--                <div>'THIS IS WHAT I WANT ONLY ADMIN USERS TO SEE!'</div>--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-header">{{ __('User Requests') }}</div>--}}
+{{--                <div class="card-body">--}}
+{{--        <table class="table">--}}
 
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>

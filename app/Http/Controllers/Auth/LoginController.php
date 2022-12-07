@@ -13,7 +13,7 @@ class LoginController extends Controller
     | Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles authenticating libary for the application and
+    | This controller handles authenticating library for the application and
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
@@ -22,7 +22,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect libary after login.
+     * Where to redirect library after login.
      *
      * @var string
      */

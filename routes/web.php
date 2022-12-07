@@ -24,8 +24,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->name('home');
 
-Route::get('/libary', [App\Http\Controllers\UsersController::class, 'libary'])->name('libary.users');
+Route::resource('category', 'CategoryController');
+#Users library
+Route::get('/users', [App\Http\Controllers\UsersController::class, 'users'])->name('library.users');
 
+#Create artwork request (users)
 Route::get('/create', [App\Http\Controllers\ArtworkController::class, 'create'])->name('artworks.create');
 Route::post('/store', [App\Http\Controllers\ArtworkController::class, 'store'])->name('artworks.store');
 
@@ -38,7 +41,7 @@ Route::get('/artworks/edit/{artwork}', [App\Http\Controllers\ArtworkController::
 Route::get('/artworks/destroy/{id}', [App\Http\Controllers\ArtworkController::class, 'destroy'])->name('artworks.destroy');
 
 
-//View libary (admin)
+//View library (admin)
 Route::get('/views', [App\Http\Controllers\ArtworkController::class, 'view'])->name('artworks.view');
 
 //Route::get('/artwork-upload', [App\Http\Controllers\ArtworkController::class, 'index'])->name('artwork');

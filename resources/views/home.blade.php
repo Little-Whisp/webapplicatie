@@ -5,10 +5,16 @@
         <div class="row justify-content-center">
             <div class="pull-left">
                 <h2>Home Page</h2>
-            </div>
+
+                 <ul class="navbar-nav mr-auto">
+                     <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('category.index') }}">Categories <span class="sr-only"> </span></a>
+                    </li>
+                </ul>
+
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('artworks.create') }}"> Create New Product</a>
-                <a class="btn btn-success" href="{{ route('libary.users') }}"> View users</a>
+                <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Create New Product</a>
+                <a class="btn btn-primary" href="{{ route('library.users') }}"> View users</a>
     </div>
 
     @if ($message = Session::get('success'))

@@ -16,7 +16,7 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new libary as well as their
+    | This controller handles the registration of new library as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -25,7 +25,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect libary after registration.
+     * Where to redirect library after registration.
      *
      * @var string
      */
@@ -51,7 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:libary'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:library'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
