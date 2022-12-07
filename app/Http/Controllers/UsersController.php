@@ -17,15 +17,15 @@ class UsersController extends Controller
     public function index()
     {
         $users = Users::select('id', 'name', 'email')->get();
-        return view('users.index', compact('users'));
+        return view('libary.index', compact('users'));
     }
 
     public function create(){
-        return view('users.create');
+        return view('libary.create');
     }
 
     public function delete(){
-        return view('users.create');
+        return view('libary.create');
     }
 
 //    public function store(Request $request){

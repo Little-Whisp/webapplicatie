@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
-                <h2>Laravel 8 CRUD with Image Upload Example from scratch - ItSolutionStuff.com</h2>
+                <h2>Home Page</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('artworks.create') }}"> Create New Product</a>
-                <a class="btn btn-success" href="{{ route('users') }}"> View users</a>
+                <a class="btn btn-success" href="{{ route('libary.users') }}"> View users</a>
     </div>
 
     @if ($message = Session::get('success'))

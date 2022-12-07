@@ -24,20 +24,21 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->name('home');
 
-Route::get('/users', [App\Http\Controllers\UsersController::class, 'users'])->name('users');
+Route::get('/libary', [App\Http\Controllers\UsersController::class, 'libary'])->name('libary.users');
 
 Route::get('/create', [App\Http\Controllers\ArtworkController::class, 'create'])->name('artworks.create');
 Route::post('/store', [App\Http\Controllers\ArtworkController::class, 'store'])->name('artworks.store');
 
 //Edit artwork request (admin)
 Route::get('/artworks/store/{id}', [App\Http\Controllers\ArtworkController::class, 'edit'])->name('artworks.edit');
-Route::post('/artworks/update/{id}', [App\Http\Controllers\ArtworkController::class, 'update'])->name('artworks.update');
+Route::put('/artworks/update/{artwork}', [App\Http\Controllers\ArtworkController::class, 'update'])->name('artworks.update');
+Route::get('/artworks/edit/{artwork}', [App\Http\Controllers\ArtworkController::class, 'edit'])->name('artworks.edit');
 
 //Delete artwork (admin)
 Route::get('/artworks/destroy/{id}', [App\Http\Controllers\ArtworkController::class, 'destroy'])->name('artworks.destroy');
 
 
-//View users (admin)
+//View libary (admin)
 Route::get('/views', [App\Http\Controllers\ArtworkController::class, 'view'])->name('artworks.view');
 
 //Route::get('/artwork-upload', [App\Http\Controllers\ArtworkController::class, 'index'])->name('artwork');
