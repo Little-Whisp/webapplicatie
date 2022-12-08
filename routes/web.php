@@ -25,6 +25,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->name('home');
 
 Route::resource('category', 'CategoryController');
+
 #Users library
 Route::get('/users', [App\Http\Controllers\UsersController::class, 'users'])->name('library.users');
 

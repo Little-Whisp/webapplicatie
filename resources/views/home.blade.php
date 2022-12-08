@@ -7,10 +7,12 @@
                 <h2>Home Page</h2>
 
                  <ul class="navbar-nav mr-auto">
-                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('category.index') }}">Categories <span class="sr-only"> </span></a>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('category.index') }}">Categories <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
+            </div>
 
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Create New Product</a>

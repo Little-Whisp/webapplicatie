@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
-                <h2>Edit Product</h2>
+                <h2>Edit artwork request</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
