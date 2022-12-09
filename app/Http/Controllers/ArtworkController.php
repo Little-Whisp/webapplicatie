@@ -8,15 +8,21 @@ use Illuminate\Http\Request;
 class ArtworkController extends Controller
 {
 
-
+    // Get all the artworks
     public function index()
     {
         $artworks = Artwork::latest()->paginate(5);
         return view('home', compact('artworks',))->with('i', (request()->input('page', 1) - 1) * 5);
-
     }
 
 
+    // Get the detail pages from an artwork
+    public function view(Artwork $artwork)
+    {
+        return view('artworks.view',compact('artwork'));
+    }
+
+    // Create a new artwork
     public function create()
     {
         return view('artworks.create');
@@ -47,18 +53,15 @@ class ArtworkController extends Controller
     }
 
 
-    public function view(Artwork $artwork)
-    {
-        return view('artworks.view', compact('artwork'));
-    }
 
 
+    // Show edit page
     public function edit(Artwork $artwork)
     {
         return view('artworks.edit', compact('artwork'));
     }
 
-
+    // Update the edited page
     public function update(Request $request, Artwork $artwork)
     {
         $request->validate([
@@ -83,9 +86,8 @@ class ArtworkController extends Controller
             ->with('success', 'Artworks updated successfully');
     }
 
-
+    // Delete the page
     public function destroy($id)
-
     {
         Artwork::destroy($id);
         return redirect('home')->with('flash_message', 'Artwork deleted!');

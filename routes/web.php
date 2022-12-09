@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Models\Artwork;
+
 
 
 /*
@@ -13,8 +13,7 @@ use App\Models\Artwork;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('/home');
+Route::get('/', function () {return view('/home');
 });
 
 //routes
@@ -24,10 +23,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->name('home');
 
-Route::resource('category', 'CategoryController');
+Route::get('/category', [App\Http\Controllers\CategoryController::class, 'category'])->name('artworks.category');
 
-#Users library
-Route::get('/users', [App\Http\Controllers\UsersController::class, 'users'])->name('library.users');
+Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users');
 
 #Create artwork request (users)
 Route::get('/create', [App\Http\Controllers\ArtworkController::class, 'create'])->name('artworks.create');
@@ -41,12 +39,11 @@ Route::get('/artworks/edit/{artwork}', [App\Http\Controllers\ArtworkController::
 //Delete artwork (admin)
 Route::get('/artworks/destroy/{id}', [App\Http\Controllers\ArtworkController::class, 'destroy'])->name('artworks.destroy');
 
+// View Artworks
+Route::get('/artworks/view/{artwork}', [App\Http\Controllers\ArtworkController::class, 'view'])->name('artworks.view');
 
-//View library (admin)
-Route::get('/views', [App\Http\Controllers\ArtworkController::class, 'view'])->name('artworks.view');
 
-//Route::get('/artwork-upload', [App\Http\Controllers\ArtworkController::class, 'index'])->name('artwork');
-//Route::post('/artwork-upload', [ App\Http\Controllers\ArtworkController::class, 'store'])->name('artwork.store');
+
 
 
 

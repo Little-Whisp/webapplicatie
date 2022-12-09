@@ -4,19 +4,19 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
-                <h2>Home Page</h2>
+                <h2>Upload Artwork</h2>
 
                  <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('category.index') }}">Categories <span class="sr-only">(current)</span></a>
+{{--                        <a class="btn btn-primary" href="{{ route('$artworks.category') }}"> Category</a>--}}
                     </li>
                 </ul>
             </div>
 
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Create New Product</a>
-                <a class="btn btn-primary" href="{{ route('library.users') }}"> View users</a>
+                <a class="btn btn-primary" href="{{ route('users') }}"> View users</a>
     </div>
 
     @if ($message = Session::get('success'))
@@ -43,7 +43,7 @@
 
                     <a class="btn btn-primary" href="{{ route('artworks.destroy', [$artwork->id]) }}">Delete</a>
 
-                        <a class="btn btn-info" href="{{ route('artworks.view',$artwork->id) }}">Show</a>
+                        <a class="btn btn-info" href="{{ route('artworks.view',$artwork->id) }}">Details</a>
 
                         <a class="btn btn-primary" href="{{ route('artworks.edit',$artwork->id) }}">Edit</a>
 
