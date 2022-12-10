@@ -11,8 +11,7 @@ class CategoryController extends Controller
     {
         $categories = Category::with('children')->whereNull('parent_id')->get();
 
-        return view('artworks.category')->with(['categories' => $categories
-        ]);
+        return view('artworks.category')->with(['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -24,7 +23,7 @@ class CategoryController extends Controller
 
         Category::create($validatedData);
 
-        return redirect()->route('category.index')->withSuccess('You have successfully created a Category!');
+        return redirect()->route('category')->withSuccess('You have successfully created a Category!');
     }
 
     public function update(Request $request, Category $category)

@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <img src="/image/{{ $artwork->image}}" width="300px">
+                <img src="/image/{{ $artwork->image}}" width="700px">
             </div>
         </div>
     </div>

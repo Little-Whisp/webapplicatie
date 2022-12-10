@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {return view('/home');
-});
+Route::get('/', function () {return view('/home');});
 
 //routes
 
@@ -23,7 +23,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->name('home');
 
-Route::get('/category', [App\Http\Controllers\CategoryController::class, 'category'])->name('artworks.category');
+Route::post('/artwork/search', [App\Http\Controllers\CategoryController::class, 'search'])->name('artworks.search');
+
+Route::resource('/categories', CategoryController::class)->names('categories');
 
 Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users');
 
