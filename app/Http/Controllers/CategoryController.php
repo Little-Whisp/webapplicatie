@@ -2,38 +2,80 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $categories = Category::with('children')->whereNull('parent_id')->get();
-
-        return view('artworks.category')->with(['categories' => $categories]);
+        $this->authorizeResource(Category::class, Category::class);
     }
 
-    public function store(Request $request)
-    {
-        $validatedData = $this->validate($request, [
-            'name'      => 'required|min:3|max:255|string',
-            'parent_id' => 'sometimes|nullable|numeric'
-        ]);
 
-        Category::create($validatedData);
-
-        return redirect()->route('category')->withSuccess('You have successfully created a Category!');
+    public function index() {
+        $categories = Category::all();
+        return view('categories')->with('categories', $categories);
     }
 
-    public function update(Request $request, Category $category)
+
+    public function create () {
+        return view('category.create');
+    }
+
+    public function view($id) {
+        $category = Category::find($id);
+        return view('category.view', compact('category'));
+    }
+
+
+    public function store(Request $request){
+        //Merge request to data
+        $data = $request->all();
+        $request->merge($data);
+
+        //Validate request
+        $this->validate($request,
+            [
+                'name' => 'bail|required|unique:categories|max:255',
+                'description' => 'nullable'
+            ]);
+        //Add and redirect
+        Category::create($request->all());
+        return redirect('/categories');
+    }
+
+
+    public function edit($id)
     {
-        $validatedData = $this->validate($request, [
-            'name'  => 'required|min:3|max:255|string'
-        ]);
+        $category = Category::find($id);
+        return view('category.edit', compact('category'));
+    }
 
-        $category->update($validatedData);
 
-        return redirect()->route('artworks.category')->withSuccess('You have successfully updated a Category!');
+    public function update(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:categories',
+                'name' => 'bail|required|max:255',
+                'description' => 'nullable'
+            ]);
+        $category = Category::find($validated['id']);
+        $category->name = $validated['name'];
+        $category->description = $validated['description'];
+        $category->save();
+        return redirect('/categories');
+    }
+
+
+    public function destroy(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:categories'
+            ]);
+        Category::destroy($validated['id']);
+        return redirect('/categories');
     }
 }

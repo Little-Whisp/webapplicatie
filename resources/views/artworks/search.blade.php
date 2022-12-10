@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Products')
+@section('title', 'Artworks')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -32,7 +32,7 @@
                             @endcan
                         </div>
                         <div class="card-body">
-                            <p>{{$artwork->description}}</p>
+                            <p>{{$artwork->details}}</p>
                             <div>
                                 <h3>
                                     @foreach($artwork->categories as $category)

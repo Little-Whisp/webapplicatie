@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header"><h1><a href="{{route('artworks.view', $artwork->id)}}"
-                                    class="link page-link">{{$artwork-->name}}</a></h1>
+                                    class="link page-link">{{$artwork->name}}</a></h1>
         <div class="justify-content-end row row-cols-auto">
             @can('update', $artwork-)
                 @if(auth()->user()->id === $artwork->user_id || auth()->user()->isAdmin())
@@ -30,21 +30,21 @@
         </div>
     </div>
     <div class="card-body">
-        <h4>Volumes: {{$artwork->image / 10}}</h4>
+        <h4>Image: {{$artwork->image / 10}}</h4>
         <p>{{$artwork->detail}}</p>
         <div>
             <h3>
                 @foreach($artwork->categories as $category)
-                    {{--Show categories linked to product--}}
-                    @if($category->name == 'Ongoing')
+                    {{--Show categories linked to artwork--}}
+                    @if($category->name == 'Like')
                         <btn class="btn btn-primary"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
-                    @elseif ($category->name == 'Finished')
+                    @elseif ($category->name == 'Dislike')
                         <btn class="btn btn-success"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
-                    @elseif ($category->name == 'Hiatus')
+                    @elseif ($category->name == 'Favourite')
                         <btn class="btn btn-warning"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>

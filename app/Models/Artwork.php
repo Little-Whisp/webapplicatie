@@ -5,12 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Artwork
- *
- * @mixin Eloquent
- */
-
 class Artwork extends Model
 {
     use HasFactory;
@@ -18,6 +12,11 @@ class Artwork extends Model
     protected $fillable = [
         'name', 'detail', 'image'
     ];
+
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
+
 
 }
 

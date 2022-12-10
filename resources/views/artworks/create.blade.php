@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
@@ -47,9 +48,44 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-
     </form>
+
+            <div>
+                <input
+                    id="user_id"
+                    name="user_id"
+                    type="hidden"
+                    value="{{Auth::user()->id}}"
+                >
+            </div>
+        </div>
+        <div>
+            Categories:
+            @foreach($categories as $category)
+                <div class="form-check">
+                    <label class="form-check-label"
+                           for="flexCheckDefault">{{$category->name}}</label>
+                    <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                           name="category_id[]" value="{{$category->id}}">
+                </div>
+            @endforeach
+            @error("category_id[]")
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <br>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         </div>
     </div>
+
+    @endif
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(auth()->user()->id === $artwork->user_id && auth()->user()->isVerified() || auth()->user()->isAdmin())
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
@@ -49,11 +50,54 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
+        <br>
+        <div>
+            Categories:
+            @foreach($categories as $category)
+                @if($artwork->categories->contains($category->id))
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label"
+                               for="flexCheckChecked">{{$category->name}}</label>
+                        <input class="form-check-input" type="checkbox" id="flexCheckChecked"
+                               name="category_id[]" value="{{$category->id}}" checked>
+                    </div>
+                @else
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label"
+                               for="flexCheckDefault">{{$category->name}}</label>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                               name="category_id[]" value="{{$category->id}}">
+                    </div>
+                @endif
+            @endforeach
+            @error("category_id[]")
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <br>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <br>
 
+
+        <div class="justify-content-center row row-cols-auto">
+            <input class="btn btn-primary" type="submit" value="Save changes">
+        </div>
+    </form>
+        </div>
+    </div>
+    <br>
 
     </form>
 
         </div>
     </div>
-
+    @endif
 @endsection

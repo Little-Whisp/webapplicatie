@@ -3,8 +3,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-{{--                            @if (Auth::user() && Auth::user()->role == 'admin')--}}
-{{--                                <div>'THIS IS WHAT I WANT ONLY ADMIN USERS TO SEE!'</div>--}}
                 <div class="card">
                     <div class="card-header">{{ __('User Requests') }}</div>
                     <div class="card-body">
@@ -30,14 +28,28 @@
                                     <td>
 
                                     </td>
-                                </tr>
                             @endforeach
+                            <td>
+                            @if(!$user->isAdmin())
+                                {{--Make user admin button for non admin-users--}}
+                                <form action="{{ route('users.make-admin', $user->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">Make Admin</button>
+                                </form>
+                            @endif
+                            </td>
 
-
+                            <td>
+                                @if($user->verified_status == 1)
+                                    {{--If user is verified, show checkmark--}}
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                @else
+                                    {{--If user isn't verified, show cross--}}
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                @endif
+                            </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
-
-{{--    @endif--}}
-
 @endsection
