@@ -22,6 +22,25 @@ class UsersController extends Controller
 
     }
 
+    public function makeAdmin(Users $user)
+    {
+        $user->role = 'admin';
+        $user->save();
+        session()->flash('alert', 'User successfully made administrator.');
+
+        return redirect(route('users'));
+    }
+
+    public function verifyUser(Users $user)
+    {
+        $user->verified_status = 1;
+        $user->save();
+        session()->flash('alert', 'Your account is now verified, you can now add new products using the button below!');
+
+        return redirect(route('products.index'));
+    }
+
+
 }
 
 

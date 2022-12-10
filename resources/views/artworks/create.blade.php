@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
+{{--    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())--}}
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
@@ -11,16 +11,16 @@
                 <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
             </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+{{--    @if ($errors->any())--}}
+{{--        <div class="alert alert-danger">--}}
+{{--            <strong>Whoops!</strong> There were some problems with your input.<br><br>--}}
+{{--            <ul>--}}
+{{--                @foreach ($errors->all() as $error)--}}
+{{--                    <li>{{ $error }}</li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--    @endif--}}
 
     <form action="{{ route('artworks.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -50,42 +50,54 @@
         </div>
     </form>
 
-            <div>
-                <input
-                    id="user_id"
-                    name="user_id"
-                    type="hidden"
-                    value="{{Auth::user()->id}}"
-                >
-            </div>
-        </div>
-        <div>
-            Categories:
-            @foreach($categories as $category)
-                <div class="form-check">
-                    <label class="form-check-label"
-                           for="flexCheckDefault">{{$category->name}}</label>
-                    <input class="form-check-input" type="checkbox" id="flexCheckDefault"
-                           name="category_id[]" value="{{$category->id}}">
-                </div>
-            @endforeach
-            @error("category_id[]")
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <br>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
+{{--        </div>--}}
+{{--        <form action="/categories" method="POST">--}}
+{{--            @csrf--}}
+{{--            <div class="row">--}}
+{{--                <div class="mb-4">--}}
+{{--                    <label for="name" class="form-label">Name: </label>--}}
+{{--                    <input id="name"--}}
+{{--                           name="name"--}}
+{{--                           type="text"--}}
+{{--                           value="{{old("name")}}"--}}
+{{--                           placeholder="EG: Category 420"--}}
+{{--                           class="input-group input-group-text @error("name") is-invalid @enderror">--}}
+{{--                    @error('name')--}}
+{{--                    <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <br>--}}
+{{--            <div class="row">--}}
+{{--                <div class="mb-4">--}}
+{{--                    <label for="description" class="form-label">Description: </label>--}}
+{{--                    <input id="description"--}}
+{{--                           name="description"--}}
+{{--                           type="text"--}}
+{{--                           value="{{old("description")}}"--}}
+{{--                           placeholder="EG: It's catergorizing."--}}
+{{--                           class="input-group input-group-text @error("description") is-invalid @enderror">--}}
+{{--                    @error("description")--}}
+{{--                    <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <br>--}}
+{{--            @if ($errors->any())--}}
+{{--                <div class="alert alert-danger">--}}
+{{--                    <ul>--}}
+{{--                        @foreach ($errors->all() as $error)--}}
+{{--                            <li>{{ $error }}</li>--}}
+{{--                        @endforeach--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+{{--            <div class="justify-content-center row row-cols-auto">--}}
+{{--                <input type="submit" value="Add" class="btn btn-primary">--}}
+{{--            </div>--}}
+{{--        </form>--}}
         </div>
     </div>
 
-    @endif
+{{--    @endif--}}
 @endsection

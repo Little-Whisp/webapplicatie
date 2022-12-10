@@ -2,7 +2,7 @@
     <div class="card-header"><h1><a href="{{route('artworks.view', $artwork->id)}}"
                                     class="link page-link">{{$artwork->name}}</a></h1>
         <div class="justify-content-end row row-cols-auto">
-            @can('update', $artwork-)
+            @can('update', $artwork)
                 @if(auth()->user()->id === $artwork->user_id || auth()->user()->isAdmin())
                     <a class="btn btn-primary" href="{{route('artworks.edit', $artwork->id)}}">
                         <i class="fa fa-pencil" aria-hidden="true"></i>

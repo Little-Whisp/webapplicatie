@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Artwork;
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
@@ -38,12 +38,12 @@ class ArtworkController extends Controller
             foreach ($searchCategories as $searchCategory)
                 if ($i === 0) {
                     $i++;
-                    $products = Product::query()
+                    $artworks = Artwork::query()
                         ->where('title', 'LIKE', "%{$search}%")
                         ->whereRelation('categories', 'categories.id', 'LIKE', "%{$searchCategory}%")
                         ->get();
                 } elseif ($i > 0) {
-                    $products = Product::query()
+                    $artworks = Artwork::query()
                         ->where('title', 'LIKE', "%{$search}%")
                         ->WhereRelation('categories', 'categories.id', 'LIKE', "%{$searchCategory}%")
                         ->get();
@@ -77,25 +77,50 @@ class ArtworkController extends Controller
     // Create a new artwork
     public function create()
     {
-        $categories = Category::all();
-        return view('artwork.create', compact('categories'));
+//        $categories = Category::all();
+        return view('artworks.create');
     }
 
 
+//    public function store(Request $request)
+//    {
+//        //Merge request to data
+//        $data = $request->all();
+//        $request->merge($data);
+//
+//        $validated = $this->validate($request,
+//            [
+//            'name' => 'required',
+//            'detail' => 'required',
+//            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//            'user_id' => 'bail|required|exists:users,id',
+//            'category_id' => 'bail|required',
+//            'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
+//        ]);
+//
+//        $input = $request->all();
+//
+//        if ($image = $request->file('image')) {
+//            $destinationPath = 'image/';
+//            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+//            $image->move($destinationPath, $profileImage);
+//            $input['image'] = "$profileImage";
+//        }
+//
+//        Artwork::create($input);
+//
+//        $artwork = Artwork::create($validated);
+////        $artwork->categories()->attach($validated['category_id']);
+//        return redirect()->route('home')
+//            ->with('success', 'Artwork created successfully.');
+//    }
+
     public function store(Request $request)
     {
-        //Merge request to data
-        $data = $request->all();
-        $request->merge($data);
-
-        $validated = $this->validate($request,
-            [
+        $request->validate([
             'name' => 'required',
             'detail' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_id' => 'bail|required|exists:users,id',
-            'category_id' => 'bail|required',
-            'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
         ]);
 
         $input = $request->all();
@@ -109,8 +134,6 @@ class ArtworkController extends Controller
 
         Artwork::create($input);
 
-        $artwork = Artwork::create($validated);
-        $artwork->categories()->attach($validated['category_id']);
         return redirect()->route('home')
             ->with('success', 'Artwork created successfully.');
     }
