@@ -8,7 +8,7 @@
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('artworks.category') }}"> Categories</a>
+                <a class="btn btn-primary" href="{{ route('categories') }}"> Categories</a>
                 <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Upload new artwork</a>
                 <a class="btn btn-primary" href="{{ route('users') }}"> View users</a>
     </div>

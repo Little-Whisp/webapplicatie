@@ -25,7 +25,7 @@ Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->n
 
 Route::post('/artwork/search', [App\Http\Controllers\CategoryController::class, 'search'])->name('artworks.search');
 
-Route::resource('/categories', CategoryController::class)->names('categories');
+Route::resource('/category', CategoryController::class)->names('category');
 
 Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users');
 
