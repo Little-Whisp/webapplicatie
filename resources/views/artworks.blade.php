@@ -8,9 +8,17 @@
                         {{ session('alert') }}
                     </div>
                 @endif
-                <h2>List of Artwork</h2>
+                <h2>List of artwork</h2>
+                <div>
+                        @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
+                    @can('create', \App\Models\Artwork::class)
+                        <btn class="btn btn-info text-bg-info"><a href="{{route('artworks.create')}}"
+                                                                  class="link page-link">Add new artwork</a></btn>
+                    @endcan
+                        @endif
+                </div>
                 <div class="input-group-lg col col-auto">
-                    @include('partials.search-artwork')
+                    @include('partials.search-piece')
                     <br>
                 </div>
                 @foreach($artworks as $artwork)

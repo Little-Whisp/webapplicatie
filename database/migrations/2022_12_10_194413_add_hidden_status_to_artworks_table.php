@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('artworks', function (Blueprint $table) {
-            //
+            $table->boolean('hidden_status')->default(0);
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('artworks', function (Blueprint $table) {
-            //
+            $table->dropColumn('hidden_status');
         });
     }
 };

@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Home')
 @section('content')
+
+{{--    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())--}}
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
@@ -8,8 +10,8 @@
             </div>
 
             <div class="pull-right">
-{{--                <a class="btn btn-primary" href="{{ route('category') }}"> Categories</a>--}}
-{{--                <a class="btn btn-primary" href="{{ route('$artworks') }}"> Artwork lists</a>--}}
+                <a class="btn btn-primary" href="{{ route('categories') }}"> Categories</a>
+                <a class="btn btn-primary" href="{{ route('artworks') }}"> Artwork lists</a>
                 <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Upload new artwork</a>
                 <a class="btn btn-primary" href="{{ route('users') }}"> View users</a>
     </div>
@@ -42,6 +44,7 @@
     </div>
     </table>
 
-    {!! $artworks->links() !!}
+
+{{--    @endif--}}
 
 @endsection

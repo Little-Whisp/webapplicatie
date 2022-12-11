@@ -56,7 +56,7 @@
                 @can('delete', $category)
                     <div class="card">
                         <div class="card-header text-bg-warning">
-                            <h1>Delete product</h1>
+                            <h1>Delete Artwork</h1>
                         </div>
                         <div class="card-body">
                             <h5>Are you sure you want to delete, {{$category->name}}?</h5>

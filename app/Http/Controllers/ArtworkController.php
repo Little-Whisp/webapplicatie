@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Artwork;
-use App\Models\Users;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
 {
 
-    // Get all the artworks
     public function index()
     {
-        $artworks = Artwork::latest()->paginate(5);
+        $artworks = Artwork::all();
         $categories = Category::all();
-        return view('home', compact('artworks', 'categories'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('artworks', compact('artworks', 'categories'));
     }
 
     public function search(Request $request)
@@ -29,38 +28,39 @@ class ArtworkController extends Controller
         // Search in the title and body columns from the products table
         if (!$search == null) {
             $artworks = Artwork::query()
-                ->where('title', 'LIKE', "%{$search}%")
+                ->where('name', 'LIKE', "%{$search}%")
                 ->orWhere('description', 'LIKE', "%{$search}%")
                 ->get();
         }
+
         if (!$searchCategories == null) {
             $i = 0;
             foreach ($searchCategories as $searchCategory)
                 if ($i === 0) {
                     $i++;
                     $artworks = Artwork::query()
-                        ->where('title', 'LIKE', "%{$search}%")
+                        ->where('name', 'LIKE', "%{$search}%")
                         ->whereRelation('categories', 'categories.id', 'LIKE', "%{$searchCategory}%")
                         ->get();
                 } elseif ($i > 0) {
                     $artworks = Artwork::query()
-                        ->where('title', 'LIKE', "%{$search}%")
+                        ->where('name', 'LIKE', "%{$search}%")
                         ->WhereRelation('categories', 'categories.id', 'LIKE', "%{$searchCategory}%")
                         ->get();
                 }
-        }
-
-            // Return the search view with the results compacted
-            return view('artworks', compact('artworks', 'categories'));
 
         }
 
+        // Return the search view with the results compacted
+        return view('artworks', compact('artworks', 'categories'));
+    }
 
-    // Get the detail pages from an artwork
+
     public function view($id)
     {
         $artwork = Artwork::find($id);
-        return view('artworks.view',compact('artwork'));
+
+        return view('artworks.view', compact('artwork'));
     }
 
     public function toggleVisibility($id)
@@ -73,126 +73,74 @@ class ArtworkController extends Controller
         return redirect(route('artworks'));
     }
 
-
-    // Create a new artwork
     public function create()
     {
-//        $categories = Category::all();
-        return view('artworks.create');
+        $categories = Category::all();
+        return view('artworks.create', compact('categories'));
     }
-
-
-//    public function store(Request $request)
-//    {
-//        //Merge request to data
-//        $data = $request->all();
-//        $request->merge($data);
-//
-//        $validated = $this->validate($request,
-//            [
-//            'name' => 'required',
-//            'detail' => 'required',
-//            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-//            'user_id' => 'bail|required|exists:users,id',
-//            'category_id' => 'bail|required',
-//            'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
-//        ]);
-//
-//        $input = $request->all();
-//
-//        if ($image = $request->file('image')) {
-//            $destinationPath = 'image/';
-//            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-//            $image->move($destinationPath, $profileImage);
-//            $input['image'] = "$profileImage";
-//        }
-//
-//        Artwork::create($input);
-//
-//        $artwork = Artwork::create($validated);
-////        $artwork->categories()->attach($validated['category_id']);
-//        return redirect()->route('home')
-//            ->with('success', 'Artwork created successfully.');
-//    }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        //Merge request to data
+        $data = $request->all();
+        $request->merge($data);
 
-        $input = $request->all();
-
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }
-
-        Artwork::create($input);
-
-        return redirect()->route('home')
-            ->with('success', 'Artwork created successfully.');
+        //Validate request
+        $validated = $this->validate($request,
+            [
+                'name' => 'bail|required|max:255',
+                'detail' => 'bail|required|max:255',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'user_id' => 'bail|required|exists:users,id',
+                'category_id' => 'bail|required',
+                'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
+            ]);
+        //Add and redirect
+        $artwork  = Artwork::create($validated);
+        $artwork ->categories()->attach($validated['category_id']);
+        session()->flash('alert', 'Artwork successfully added.');
+        return redirect('/artworks');
     }
 
-
-
-    // Show edit page
     public function edit($id)
     {
-        $artwork = Artwork::find($id);
+        $artwork  = Artwork::find($id);
         $categories = Category::all();
-        $selectedCategories = $artwork->categories;
+        $selectedCategories = $artwork ->categories;
         return view('artworks.edit', compact('artwork', 'categories', 'selectedCategories'));
     }
 
-    // Update the edited page
-    public function update(Request $request, Artwork $artwork)
+    public function update(Request $request)
     {
         $validated = $this->validate($request,
             [
                 'id' => 'bail|required|exists:products',
-                'name' => 'required',
-                'detail' => 'required',
+                'title' => 'bail|required|max:255',
+                'price' => 'bail|required|numeric',
+                'description' => 'nullable',
                 'category_id' => 'bail|required',
                 'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
             ]);
         $artwork = Artwork::find($validated['id']);
-        $artwork->title = $validated['title'];
-        $artwork->price = $validated['price'];
-        $artwork->description = $validated['description'];
-        $artwork->save();
-        $artwork->categories()->sync($validated['category_id']);
+        $artwork ->name = $validated['title'];
+        $artwork ->image = $validated['image'];
+        $artwork ->detail = $validated['detail'];
+        $artwork ->save();
+        $artwork ->categories()->sync($validated['category_id']);
         return redirect(route('artworks.view', $artwork->id));
-
-
-        $input = $request->all();
-
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        } else {
-            unset($input['image']);
-        }
-
-        $artwork->update($input);
-
-        return redirect()->route('home')
-            ->with('success', 'Artworks updated successfully');
     }
 
-    // Delete the page
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Artwork::destroy($id);
-        return redirect('home')->with('flash_message', 'Artwork deleted!');
-
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:artworks'
+            ]);
+        Artwork::destroy($validated);
+        session()->flash('alert', 'Product successfully deleted.');
+        return redirect('/artworks');
     }
+
 }
 
 

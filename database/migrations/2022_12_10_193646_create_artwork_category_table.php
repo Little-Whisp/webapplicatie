@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('artwork_category', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('artwork_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }

@@ -1,10 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArtworkController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +16,18 @@ use App\Http\Controllers\UsersController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', function () {return view('/home');});
-
 //routes
 
-Route::get('/home', [App\Http\Controllers\ArtworkController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'view'])->name('artworks');
+Route::get('/artworks', [HomeController::class, 'view'])->name('artworks');
 
 Auth::routes();
 
-#Create artwork request (users)
+#Create artwork(admin)
 Route::get('/create', [App\Http\Controllers\ArtworkController::class, 'create'])->name('artworks.create');
 Route::post('/store', [App\Http\Controllers\ArtworkController::class, 'store'])->name('artworks.store');
 
-//Edit artwork request (admin)
+//Edit artwork (admin)
 Route::get('/artworks/store/{id}', [App\Http\Controllers\ArtworkController::class, 'edit'])->name('artworks.edit');
 Route::put('/artworks/update/{artwork}', [App\Http\Controllers\ArtworkController::class, 'update'])->name('artworks.update');
 Route::get('/artworks/edit/{artwork}', [App\Http\Controllers\ArtworkController::class, 'edit'])->name('artworks.edit');
@@ -39,21 +38,29 @@ Route::get('/artworks/destroy/{id}', [App\Http\Controllers\ArtworkController::cl
 // View Artworks
 Route::get('/artworks/view/{artwork}', [App\Http\Controllers\ArtworkController::class, 'view'])->name('artworks.view');
 
+//Users (Public)
+Route::get('/users/profile', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+Route::post('/users/{user}/verify', [UserController::class, 'verifyUser'])->name('users.verify-user');
+
+//Users (public)
+Route::post('/users/{user}/verify', [UserController::class, 'verifyUser'])->name('users.verify-user');
 
 //Artworks (public)
 Route::resource('/artwork', ArtworkController::class)->names('artworks');
-Route::post('/artwork/search', [App\Http\Controllers\ArtworkController::class, 'search'])->name('artworks.search');
+Route::post('/artwork/search', [ArtworkController::class, 'search'])->name('artworks.search');
 
 //Categories (Public)
-Route::resource('/category', CategoryController::class)->names('category');
+Route::resource('/categories', CategoryController::class)->names('categories');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
 });
 //Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users');
-    Route::post('/users/{user}/make-admin', [UsersController::class, 'makeAdmin'])->name('users.make-admin');
-    Route::post('/users/{user}/verify', [UsersController::class, 'verifyUser'])->name('users.verify-user');
+    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+    Route::post('/users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
 
     //Artworks (Admin)
     Route::post('/{artwork}/toggle-visibility', [ArtworkController::class, 'toggleVisibility'])->name('artworks.toggle-visibility');

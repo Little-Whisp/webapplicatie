@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('artworks', function (Blueprint $table) {
-            //
+            $table->foreignId('user_id')->after('id')->nullable()->constrained()->nullOnDelete();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('artworks', function (Blueprint $table) {
-            //
+            $table->dropConstrainedForeignId('user_id');
         });
     }
 };

@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_artworks', function (Blueprint $table) {
+        Schema::create('category_artwork', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('artwork_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_artworks');
+        Schema::dropIfExists('category_artwork');
     }
 };
+
