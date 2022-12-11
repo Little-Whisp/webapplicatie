@@ -3,7 +3,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Users;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -19,10 +19,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $users= Users::where('email', 'slmartis"outlook.com')->first();
+        $users= User::where('email', 'slmartis"outlook.com')->first();
 
         if(!$users){
-            Users::create([
+            User::create([
                 'name' => 'Silviani Martis',
                 'email' => 'slmartis@outlook.com',
                 'role'=> 'admin',

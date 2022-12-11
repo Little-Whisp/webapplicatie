@@ -1,11 +1,13 @@
 @extends('layouts.app')
+@section('title', 'Home')
 @section('content')
 
-{{--    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())--}}
+    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
+                <div class="card-header">{{ __('Home') }}</div>
                 <h2>My Dashboard</h2>
             </div>
 
@@ -45,6 +47,6 @@
     </table>
 
 
-{{--    @endif--}}
+    @endif
 
 @endsection

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
-
-use App\Models\User;
 use Illuminate\Validation\ValidationException;
 
 
@@ -45,9 +43,7 @@ class UserController extends Controller
         return redirect(route('artworks.index'));
     }
 
-    /**
-     * @throws ValidationException
-     */
+
     public function update(Request $request)
     {
         $validated = $this->validate($request,

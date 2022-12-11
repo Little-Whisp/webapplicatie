@@ -21,6 +21,8 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'view'])->name('artworks');
 Route::get('/artworks', [HomeController::class, 'view'])->name('artworks');
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
 #Create artwork(admin)

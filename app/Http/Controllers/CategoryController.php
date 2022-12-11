@@ -24,8 +24,10 @@ class CategoryController extends Controller
     }
 
     public function view($id) {
+
         $category = Category::find($id);
-        return view('category.view', compact('category'));
+
+        return view('Admin.category.view', compact('category'));
     }
 
 

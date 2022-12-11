@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
-        {{-- Create a new artwork.--}}
+        Upload a new artwork.
         <div class="container">
             <div class="row justify-content-center">
                 <div class="mb-4 col-6">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            @else
+{{--            @else--}}
                 <meta http-equiv="Refresh" content="0; url='/404'" />
     @endif
 

@@ -29,7 +29,7 @@ class ArtworkController extends Controller
         if (!$search == null) {
             $artworks = Artwork::query()
                 ->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('description', 'LIKE', "%{$search}%")
+                ->orWhere('detail', 'LIKE', "%{$search}%")
                 ->get();
         }
 
@@ -60,7 +60,7 @@ class ArtworkController extends Controller
     {
         $artwork = Artwork::find($id);
 
-        return view('artworks.view', compact('artwork'));
+        return view('artwork.view', compact('artwork'));
     }
 
     public function toggleVisibility($id)
@@ -70,7 +70,7 @@ class ArtworkController extends Controller
         $artwork->save();
         session()->flash('alert', 'Successfully toggled a artwork!');
 
-        return redirect(route('artworks'));
+        return redirect(route('artworks.index'));
     }
 
     public function create()
@@ -99,7 +99,7 @@ class ArtworkController extends Controller
         $artwork  = Artwork::create($validated);
         $artwork ->categories()->attach($validated['category_id']);
         session()->flash('alert', 'Artwork successfully added.');
-        return redirect('/artworks');
+        return redirect('/artwork');
     }
 
     public function edit($id)
@@ -114,17 +114,17 @@ class ArtworkController extends Controller
     {
         $validated = $this->validate($request,
             [
-                'id' => 'bail|required|exists:products',
-                'title' => 'bail|required|max:255',
-                'price' => 'bail|required|numeric',
-                'description' => 'nullable',
+                'name' => 'bail|required|max:255',
+                'detail' => 'bail|required|max:255',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'user_id' => 'bail|required|exists:users,id',
                 'category_id' => 'bail|required',
                 'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
             ]);
         $artwork = Artwork::find($validated['id']);
         $artwork ->name = $validated['title'];
-        $artwork ->image = $validated['image'];
         $artwork ->detail = $validated['detail'];
+        $artwork ->image = $validated['image'];
         $artwork ->save();
         $artwork ->categories()->sync($validated['category_id']);
         return redirect(route('artworks.view', $artwork->id));
@@ -137,8 +137,8 @@ class ArtworkController extends Controller
                 'id' => 'bail|required|exists:artworks'
             ]);
         Artwork::destroy($validated);
-        session()->flash('alert', 'Product successfully deleted.');
-        return redirect('/artworks');
+        session()->flash('alert', 'Artwork successfully deleted.');
+        return redirect('/artwork');
     }
 
 }
