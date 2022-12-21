@@ -30,14 +30,14 @@
                             <br>
                             <div class="row">
                                 <div class="mb-4">
-                                    <label for="description" class="form-label">Description: </label>
-                                    <input id="description"
-                                           name="description"
+                                    <label for="detail" class="form-label">detail: </label>
+                                    <input id="detail"
+                                           name="detail"
                                            type="text"
-                                           value="{{old("description")}}"
+                                           value="{{old("detail")}}"
                                            placeholder="EG: It's catergorizing."
-                                           class="input-group input-group-text @error("description") is-invalid @enderror">
-                                    @error("description")
+                                           class="input-group input-group-text @error("detail") is-invalid @enderror">
+                                    @error("detail")
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

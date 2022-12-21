@@ -26,13 +26,13 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
-                            <label for="description">Description: </label>
-                            <input id="description"
-                                   name="description"
+                            <label for="detail">Detail: </label>
+                            <input id="detail"
+                                   name="detail"
                                    type="text"
-                                   value="{{old("description", $category->description)}}"
-                                   class="input-group input-group-text @error("description") is-invalid @enderror">
-                            @error("description")
+                                   value="{{old("detail", $category->detail)}}"
+                                   class="input-group input-group-text @error("detail") is-invalid @enderror">
+                            @error("detail")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>

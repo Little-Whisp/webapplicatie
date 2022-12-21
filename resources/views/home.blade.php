@@ -1,18 +1,17 @@
 @extends('layouts.app')
-@section('title', 'Home')
+{{--@section('title', 'Home')--}}
 @section('content')
 
-    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
+{{--    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())--}}
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="pull-left">
-                <div class="card-header">{{ __('Home') }}</div>
                 <h2>My Dashboard</h2>
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('categories') }}"> Categories</a>
+{{--                <a class="btn btn-primary" href="{{ route('categories') }}"> Categories</a>--}}
                 <a class="btn btn-primary" href="{{ route('artworks') }}"> Artwork lists</a>
                 <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Upload new artwork</a>
                 <a class="btn btn-primary" href="{{ route('users') }}"> View users</a>
@@ -47,6 +46,6 @@
     </table>
 
 
-    @endif
+{{--    @endif--}}
 
 @endsection

@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p>{{$category->description}}</p>
+                                <p>{{$category->detail}}</p>
                                 @foreach($category->artworks as $artwork)
                                     <p><a href="/artworks/{{$artwork->id}}">{{$artwork->name}}</a></p>
                                 @endforeach

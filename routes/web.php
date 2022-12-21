@@ -1,6 +1,6 @@
 <?php
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\UserController;
@@ -19,15 +19,15 @@ use App\Http\Controllers\HomeController;
 //routes
 
 Route::get('/', [HomeController::class, 'view'])->name('artworks');
-Route::get('/artworks', [HomeController::class, 'view'])->name('artworks');
+Route::get('/artworks', [ArtworkController::class, 'view'])->name('artworks');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 #Create artwork(admin)
-Route::get('/create', [App\Http\Controllers\ArtworkController::class, 'create'])->name('artworks.create');
-Route::post('/store', [App\Http\Controllers\ArtworkController::class, 'store'])->name('artworks.store');
+Route::get('/artworks/create', [App\Http\Controllers\ArtworkController::class, 'create'])->name('artworks.create');
+Route::post('/artworks/store', [App\Http\Controllers\ArtworkController::class, 'store'])->name('artworks.store');
 
 //Edit artwork (admin)
 Route::get('/artworks/store/{id}', [App\Http\Controllers\ArtworkController::class, 'edit'])->name('artworks.edit');
@@ -55,7 +55,6 @@ Route::post('/artwork/search', [ArtworkController::class, 'search'])->name('artw
 
 //Categories (Public)
 Route::resource('/categories', CategoryController::class)->names('categories');
-
 
 Route::middleware(['auth', 'verified'])->group(function () {
 });

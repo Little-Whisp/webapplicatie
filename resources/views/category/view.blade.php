@@ -8,7 +8,7 @@
                     <div class="card-header text-bg-dark"><h1>{{$category->name}}</h1></div>
                     <div class="card-body">
                         <h3>Description:</h3>
-                        <p>{{$category->description}}</p>
+                        <p>{{$category->detail}}</p>
                     </div>
                 </div>
                 <br>

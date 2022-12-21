@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
     @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
-        Upload a new artwork.
+
         <div class="container">
+            <btn class="btn btn-info text-bg-info"><a href="{{route('home')}}"
+                                                      class="link page-link">Back</a></btn>
             <div class="row justify-content-center">
                 <div class="mb-4 col-6">
                     <div class="card">
@@ -11,7 +13,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form action="/Artwork" method="POST">
+                            <form action="{{route('artworks.store')}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-4">
@@ -98,8 +100,8 @@
                     </div>
                 </div>
             </div>
-{{--            @else--}}
-                <meta http-equiv="Refresh" content="0; url='/404'" />
+            @else
+{{--                <meta http-equiv="Refresh" content="0; url='/404'" />--}}
     @endif
 
 @endsection

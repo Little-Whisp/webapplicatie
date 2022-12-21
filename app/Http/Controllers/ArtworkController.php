@@ -122,7 +122,7 @@ class ArtworkController extends Controller
                 'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
             ]);
         $artwork = Artwork::find($validated['id']);
-        $artwork ->name = $validated['title'];
+        $artwork ->name = $validated['name'];
         $artwork ->detail = $validated['detail'];
         $artwork ->image = $validated['image'];
         $artwork ->save();
