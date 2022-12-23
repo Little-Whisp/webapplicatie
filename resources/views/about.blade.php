@@ -12,9 +12,9 @@
                 <div class="card">
                     <div class="card-header">About</div>
                     <div class="card-body">
-                        <h2>{{$name}}</h2>
-                        <p>{{$image}}</p>
-                        <p>{{$detail}}</p>
+                        <h2>{{$title}}</h2>
+                        <p>{{$text}}</p>
+                        @include('partials.header-piece', ['heroText' => 'Our Proud Owner: '])
                     </div>
                 </div>
             </div>

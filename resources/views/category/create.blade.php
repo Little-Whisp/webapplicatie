@@ -30,7 +30,7 @@
                             <br>
                             <div class="row">
                                 <div class="mb-4">
-                                    <label for="detail" class="form-label">detail: </label>
+                                    <label for="detail" class="form-label">Detail: </label>
                                     <input id="detail"
                                            name="detail"
                                            type="text"

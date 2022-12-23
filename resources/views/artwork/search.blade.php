@@ -7,13 +7,15 @@
                 <h2>List of Artworks</h2>
                 <div>
                     @can('create', \App\Models\Artwork::class)
-                        <btn class="btn btn-info"><a href="{{route('artworks.create')}}" class="link page-link">Add new artwork</a></btn>
+                        <btn class="btn btn-info"><a href="{{route('artworks.create')}}" class="link page-link">Add new
+                                artwork</a></btn>
                     @endcan
                 </div>
                 <div class="input-group-lg col col-auto">
                     <form action="{{ route('artworks.search') }}" method="POST">
                         @csrf
-                        <label for="search"></label><input type="text" class="form-control" name="search" id="search" placeholder="Search...">
+                        <label for="search"></label><input type="text" class="form-control" name="search" id="search"
+                                                           placeholder="Search...">
                         <button type="submit" class="btn btn-success">
                             <i class="fa fa-search"></i>
                         </button>
@@ -23,8 +25,8 @@
                 <h3>Search Results: </h3>
                 @foreach($artworks as $artwork)
                     <div class="card">
-                        <div class="card-header"><h1><a href="/products/{{$artwork->id}}"
-                                                        class="link page-link">{{$artwork->title}}</a></h1>
+                        <div class="card-header"><h1><a href="/artworks/{{$artwork->id}}"
+                                                        class="link page-link">{{$artwork->name}}</a></h1>
                             @can('update', $artwork)
                                 <a class="btn btn-secondary" href="{{route('artworks.edit', $artwork->id)}}">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -32,7 +34,7 @@
                             @endcan
                         </div>
                         <div class="card-body">
-                            <p>{{$artwork->details}}</p>
+                            <p>{{$artwork->detail}}</p>
                             <div>
                                 <h3>
                                     @foreach($artwork->categories as $category)

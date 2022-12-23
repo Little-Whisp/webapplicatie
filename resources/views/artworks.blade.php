@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Portfolio')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -8,14 +9,13 @@
                         {{ session('alert') }}
                     </div>
                 @endif
-                <h2>List of artwork</h2>
+                <h2>List of Artwork</h2>
                 <div>
-                        @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
                     @can('create', \App\Models\Artwork::class)
                         <btn class="btn btn-info text-bg-info"><a href="{{route('artworks.create')}}"
-                                                                  class="link page-link">Add new artwork</a></btn>
+                                                                  class="link page-link">Add new
+                                Artwork</a></btn>
                     @endcan
-                        @endif
                 </div>
                 <div class="input-group-lg col col-auto">
                     @include('partials.search-piece')

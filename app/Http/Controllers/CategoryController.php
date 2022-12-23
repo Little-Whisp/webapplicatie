@@ -23,11 +23,9 @@ class CategoryController extends Controller
         return view('category.create');
     }
 
-    public function view($id) {
-
+    public function show($id) {
         $category = Category::find($id);
-
-        return view('category.view', compact('category'));
+        return view('category.show', compact('category'));
     }
 
 
@@ -40,7 +38,7 @@ class CategoryController extends Controller
         $this->validate($request,
             [
                 'name' => 'bail|required|unique:categories|max:255',
-                'detail' => 'nullable'
+                'description' => 'nullable'
             ]);
         //Add and redirect
         Category::create($request->all());
@@ -61,11 +59,11 @@ class CategoryController extends Controller
             [
                 'id' => 'bail|required|exists:categories',
                 'name' => 'bail|required|max:255',
-                'detail' => 'nullable'
+                'description' => 'nullable'
             ]);
         $category = Category::find($validated['id']);
         $category->name = $validated['name'];
-        $category->detail = $validated['detail'];
+        $category->description = $validated['description'];
         $category->save();
         return redirect('/categories');
     }
@@ -81,3 +79,4 @@ class CategoryController extends Controller
         return redirect('/categories');
     }
 }
+

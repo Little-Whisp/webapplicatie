@@ -10,14 +10,10 @@ class Artwork extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'detail', 'image'
+        'name', 'detail', 'image', 'user_id'
     ];
 
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
-
-
 }
-
-

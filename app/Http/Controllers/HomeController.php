@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artwork;
-use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,16 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $artworks = Artwork::all();
-
-        return view('home', compact('categories', 'artworks'));
+        return view('home');
     }
-    public function view()
+    public function show()
     {
-        $categories = Category::all();
-        $artworks = Artwork::all();
-
-        return view('home', compact('categories', 'artworks'));
+        return view('home');
     }
 }

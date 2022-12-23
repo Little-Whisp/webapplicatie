@@ -1,10 +1,9 @@
 @extends('layouts.app')
+@section('title', 'Add Artwork')
 @section('content')
     @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
-
+        {{-- Create a new artwork.--}}
         <div class="container">
-            <btn class="btn btn-info text-bg-info"><a href="{{route('home')}}"
-                                                      class="link page-link">Back</a></btn>
             <div class="row justify-content-center">
                 <div class="mb-4 col-6">
                     <div class="card">
@@ -13,18 +12,18 @@
                         </div>
                         <div class="card-body">
 
-                            <form action="{{route('artworks.store')}}" method="POST">
+                            <form action="/portfolio" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-4">
-                                        <label for="name" class="form-label">Name: </label>
-                                        <input id="name"
-                                               name="name"
+                                        <label for="title" class="form-label">Title: </label>
+                                        <input id="title"
+                                               name="title"
                                                type="text"
-                                               value="{{old("name")}}"
-                                               placeholder="EG: New art piece"
-                                               class="input-group input-group-text @error("name") is-invalid @enderror">
-                                        @error('name')
+                                               value="{{old("title")}}"
+                                               placeholder="EG: Attack on Titan"
+                                               class="input-group input-group-text @error("title") is-invalid @enderror">
+                                        @error('title')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -32,15 +31,15 @@
                                 <br>
                                 <div class="row">
                                     <div class="mb-4">
-                                        <label for="image">Image: </label>
-                                        <input id="image"
-                                               name="image"
-                                               type="file"
+                                        <label for="price">Price (in €): </label>
+                                        <input id="price"
+                                               name="price"
+                                               type="number"
                                                min="0.0"
                                                step="0.01"
                                                placeholder="EG: 20"
-                                               class="input-group input-group-text @error("image") is-invalid @enderror">
-                                        @error("image")
+                                               class="input-group input-group-text @error("price") is-invalid @enderror">
+                                        @error("price")
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -48,14 +47,14 @@
                                 <br>
                                 <div class="row">
                                     <div class="mb-4">
-                                        <label for="detail" class="form-label">Detail: </label>
-                                        <input id="detail"
-                                               name="detail"
+                                        <label for="description" class="form-label">Description: </label>
+                                        <input id="description"
+                                               name="description"
                                                type="text"
-                                               value="{{old("detail")}}"
-                                               placeholder="EG: Random."
-                                               class="input-group input-group-text @error("detail") is-invalid @enderror">
-                                        @error("detail")
+                                               value="{{old("description")}}"
+                                               placeholder="EG: The walls have fallen."
+                                               class="input-group input-group-text @error("description") is-invalid @enderror">
+                                        @error("description")
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -100,8 +99,10 @@
                     </div>
                 </div>
             </div>
-            @else
-{{--                <meta http-equiv="Refresh" content="0; url='/404'" />--}}
+    @else
+                <meta http-equiv="Refresh" content="0; url='/404'" />
     @endif
 
 @endsection
+
+

@@ -34,9 +34,9 @@
                             <input id="email"
                                    name="email"
                                    type="text"
-                                   value="{{old("description", $user->email)}}"
+                                   value="{{old("detail", $user->email)}}"
                                    class="input-group input-group-text @error("email") is-invalid @enderror">
-                            @error("description")
+                            @error("detail")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
@@ -46,7 +46,7 @@
                                    type="password"
                                    value=""
                                    class="input-group input-group-text @error("password") is-invalid @enderror">
-                            @error("description")
+                            @error("detail")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             @if ($errors->any())
@@ -65,7 +65,7 @@
                         <div>
                             Verification:
                             @if($user->verified_status == 1)
-                                <p>Yay, your account is verified!</p>
+                                <p>Your account is verified!</p>
                             @else
                                 <p>It looks like your account isn't verified yet.
                                     <a href="/home">How to verify my account?</a>

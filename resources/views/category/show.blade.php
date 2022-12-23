@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header text-bg-dark"><h1>{{$category->name}}</h1></div>
                     <div class="card-body">
-                        <h3>Description:</h3>
+                        <h3>Detail:</h3>
                         <p>{{$category->detail}}</p>
                     </div>
                 </div>

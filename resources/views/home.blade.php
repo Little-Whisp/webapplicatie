@@ -1,51 +1,35 @@
 @extends('layouts.app')
-{{--@section('title', 'Home')--}}
+@section('title', 'Home')
 @section('content')
-
-{{--    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())--}}
-
     <div class="container">
         <div class="row justify-content-center">
-            <div class="pull-left">
-                <h2>My Dashboard</h2>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Home') }}</div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        <h2>Welcome to my Porfolio!</h2>
+                        <p>You are now logged in.</p>
+                        <br>
+                        <h2>Verification</h2>
+                        <p>To add art to the site the user must be verified. For one to verify themselves they need
+                            to view at least <a href="/portfolio">two art pieces</a> on this site. After that the user
+                            will
+                            be able to add and edit
+                            their own artwork. A user can check their verification status at any moment on their profile
+                            in the dropdown menu.</p>
+                        <br>
+                        <div>
+                            @include('partials.header-piece', ['heroText' => 'Owner: '])
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="pull-right">
-{{--                <a class="btn btn-primary" href="{{ route('categories') }}"> Categories</a>--}}
-                <a class="btn btn-primary" href="{{ route('artworks') }}"> Artwork lists</a>
-                <a class="btn btn-primary" href="{{ route('artworks.create') }}"> Upload new artwork</a>
-                <a class="btn btn-primary" href="{{ route('users') }}"> View users</a>
-    </div>
-
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Details</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($artworks as $artwork)
-            <tr>
-                <td>{{ ++$i }}</td>
-                <td><img src="/image/{{ $artwork->image }}" width="200px"></td>
-                <td>{{ $artwork->name }}</td>
-                <td>{{ $artwork->detail }}</td>
-                <td>
-                        <a class="btn btn-primary" href="{{ route('artworks.destroy', [$artwork->id]) }}">Delete</a>
-
-                        <a class="btn btn-info" href="{{ route('artworks.view',$artwork->id) }}">Details</a>
-
-                        <a class="btn btn-primary" href="{{ route('artworks.edit',$artwork->id) }}">Edit</a>
-                </td>
-            </tr>
-
-        @endforeach
         </div>
     </div>
-    </table>
-
-
-{{--    @endif--}}
-
 @endsection

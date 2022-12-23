@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('detail')->nullable();
             $table->timestamps();
+            $table->boolean('hidden_status')->default(0);
         });
     }
 

@@ -5,12 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
-
-use Illuminate\Validation\ValidationException;
-
 
 class UserController extends Controller
 {
@@ -22,7 +16,7 @@ class UserController extends Controller
     public function edit()
     {
         $user = auth()->user();
-        return view('users.edit', compact('user'));
+        return view('user.edit', compact('user'));
     }
 
     public function makeAdmin(User $user)
@@ -38,11 +32,10 @@ class UserController extends Controller
     {
         $user->verified_status = 1;
         $user->save();
-        session()->flash('alert', 'Your account is now verified, you can now add new products using the button below!');
+        session()->flash('alert', 'Your account is now verified, you can now add new artworks using the button below!');
 
         return redirect(route('artworks.index'));
     }
-
 
     public function update(Request $request)
     {
@@ -61,9 +54,6 @@ class UserController extends Controller
         return redirect(route('users.edit', $user->id));
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function destroy(Request $request)
     {
         $validated = $this->validate($request,
@@ -74,8 +64,4 @@ class UserController extends Controller
         return redirect('/home');
     }
 }
-
-
-
-
 

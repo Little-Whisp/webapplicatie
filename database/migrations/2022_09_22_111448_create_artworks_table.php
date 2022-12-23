@@ -11,7 +11,6 @@ return new class extends Migration
      *
      * @return void
      */
-
     public function up()
     {
         Schema::create('artworks', function (Blueprint $table) {
@@ -21,7 +20,6 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
         });
-
     }
 
     /**

@@ -4,11 +4,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-
-use Illuminate\Support\Facades\Hash;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -23,7 +20,7 @@ class UsersTableSeeder extends Seeder
 
         if(!$users){
             User::create([
-                'name' => 'Silviani Martis',
+                'name' => 'Jany',
                 'email' => 'slmartis@outlook.com',
                 'role'=> 'admin',
                 'password' => Hash::make('password')

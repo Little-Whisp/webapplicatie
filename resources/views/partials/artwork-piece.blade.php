@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"><h1><a href="{{route('artworks.view', $artwork->id)}}"
+    <div class="card-header"><h1><a href="{{route('artworks.show', $artwork->id)}}"
                                     class="link page-link">{{$artwork->name}}</a></h1>
         <div class="justify-content-end row row-cols-auto">
             @can('update', $artwork)
@@ -30,23 +30,23 @@
         </div>
     </div>
     <div class="card-body">
-        <h4>Image: {{$artwork->image / 10}}</h4>
-        <p>{{$artwork->detail}}</p>
+        <h4>Gallery {{$artwork->image / 10}}</h4>
+        <p>{{$product->detail}}</p>
         <div>
             <h3>
                 @foreach($artwork->categories as $category)
                     {{--Show categories linked to artwork--}}
-                    @if($category->name == 'Like')
+                    @if($category->name == 'new')
                         <btn class="btn btn-primary"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
-                    @elseif ($category->name == 'Dislike')
+                    @elseif ($category->name == 'recent')
                         <btn class="btn btn-success"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
-                    @elseif ($category->name == 'Favourite')
+                    @elseif ($category->name == 'old')
                         <btn class="btn btn-warning"><a class="link page-link text-white"
-                                                        href="/categories/{{$category->id}}">{{$category->name}}</a>
+                                                       href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
                     @else
                         <btn class="btn btn-dark"><a class="link page-link text-white"
