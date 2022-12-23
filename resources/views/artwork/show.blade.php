@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('title', 'Portfolio - View')
-{{-- Show artwork.--}}
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

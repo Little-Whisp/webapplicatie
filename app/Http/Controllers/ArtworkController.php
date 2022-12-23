@@ -89,11 +89,11 @@ class ArtworkController extends Controller
         $validated = $this->validate($request,
             [
                 'name' => 'bail|required|max:255',
-                'detail' => 'bail|required|numeric',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'detail' => 'bail|required|max:255',
+                'image' => 'required|image|file',
                 'user_id' => 'bail|required|exists:users,id',
                 'category_id' => 'bail|required',
-                'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
+                'category_id.*' => 'bail|required|max:255|exists:categories,id'
             ]);
         //Add and redirect
         $artwork = Artwork::create($validated);
@@ -116,10 +116,10 @@ class ArtworkController extends Controller
             [
                 'id' => 'bail|required|exists:artworks',
                 'name' => 'bail|required|max:255',
-                'detail' => 'bail|required|numeric',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'detail' => 'bail|required|max:255',
+                'image' => 'required|image|file',
                 'category_id' => 'bail|required',
-                'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
+                'category_id.*' => 'bail|required|max:255|exists:categories,id'
             ]);
         $artwork = Artwork::find($validated['id']);
         $artwork->name = $validated['name'];

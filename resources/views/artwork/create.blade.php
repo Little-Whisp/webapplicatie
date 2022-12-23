@@ -16,14 +16,14 @@
                                 @csrf
                                 <div class="row">
                                     <div class="mb-4">
-                                        <label for="title" class="form-label">Title: </label>
-                                        <input id="title"
-                                               name="title"
+                                        <label for="name" class="form-label">Name: </label>
+                                        <input id="name"
+                                               name="name"
                                                type="text"
-                                               value="{{old("title")}}"
-                                               placeholder="EG: Attack on Titan"
-                                               class="input-group input-group-text @error("title") is-invalid @enderror">
-                                        @error('title')
+                                               value="{{old("name")}}"
+                                               placeholder="Name artwork"
+                                               class="input-group input-group-text @error("name") is-invalid @enderror">
+                                        @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -31,15 +31,13 @@
                                 <br>
                                 <div class="row">
                                     <div class="mb-4">
-                                        <label for="price">Price (in €): </label>
-                                        <input id="price"
-                                               name="price"
-                                               type="number"
-                                               min="0.0"
-                                               step="0.01"
-                                               placeholder="EG: 20"
-                                               class="input-group input-group-text @error("price") is-invalid @enderror">
-                                        @error("price")
+                                        <label for="detail">Detail: </label>
+                                        <input id="detail"
+                                               name="detail"
+                                               type="text"
+                                               placeholder="details"
+                                               class="input-group input-group-text @error("detail") is-invalid @enderror">
+                                        @error("detail")
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -47,14 +45,14 @@
                                 <br>
                                 <div class="row">
                                     <div class="mb-4">
-                                        <label for="description" class="form-label">Description: </label>
-                                        <input id="description"
-                                               name="description"
-                                               type="text"
-                                               value="{{old("description")}}"
-                                               placeholder="EG: The walls have fallen."
-                                               class="input-group input-group-text @error("description") is-invalid @enderror">
-                                        @error("description")
+                                        <label for="image" class="form-label">Image: </label>
+                                        <input id="image"
+                                               name="image"
+                                               type="file"
+                                               value="{{old("image")}}"
+                                               placeholder="add file"
+                                               class="input-group input-group-text @error("image") is-invalid @enderror">
+                                        @error("image")
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>

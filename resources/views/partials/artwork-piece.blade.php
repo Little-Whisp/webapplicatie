@@ -30,8 +30,8 @@
         </div>
     </div>
     <div class="card-body">
-        <h4>Gallery {{$artwork->image / 10}}</h4>
-        <p>{{$product->detail}}</p>
+{{--        <h4>Gallery {{$artwork->image / 10}}</h4>--}}
+        <p>{{$artwork->detail}}</p>
         <div>
             <h3>
                 @foreach($artwork->categories as $category)

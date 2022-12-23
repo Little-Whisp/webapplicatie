@@ -30,7 +30,7 @@
                                 <label for="detail">Detail </label>
                                 <input id="detail"
                                        name="detail"
-                                       type="number"
+                                       type="text"
                                        min="0.0"
                                        step="0.01"
                                        value="{{old("detail", $artwork->detail)}}"

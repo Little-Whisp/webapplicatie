@@ -14,7 +14,6 @@
                     <div class="card-body">
                         <h2>{{$title}}</h2>
                         <p>{{$text}}</p>
-                        @include('partials.header-piece', ['heroText' => 'Our Proud Owner: '])
                     </div>
                 </div>
             </div>

@@ -17,11 +17,9 @@
                         <p>You are now logged in.</p>
                         <br>
                         <h2>Verification</h2>
-                        <p>To add art to the site the user must be verified. For one to verify themselves they need
-                            to view at least <a href="/portfolio">two art pieces</a> on this site. After that the user
-                            will
-                            be able to add and edit
-                            their own artwork. A user can check their verification status at any moment on their profile
+                        <p>To add art to the site the user must be verified. If you want to add an artwork
+                            you need to view <a href="/portfolio">two art pieces</a> on this site. After that the user
+                            will be able to add and edit their own artwork. A user can check their verification status at any moment on their profile
                             in the dropdown menu.</p>
                         <br>
                         <div>
