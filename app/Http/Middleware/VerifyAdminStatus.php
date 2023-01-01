@@ -18,7 +18,7 @@ class VerifyAdminStatus
     {
         if (!auth()->user()->isAdmin()){
             return redirect(404);
-    }
+        }
         return $next($request);
     }
 }

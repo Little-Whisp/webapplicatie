@@ -30,23 +30,23 @@
         </div>
     </div>
     <div class="card-body">
-{{--        <h4>Gallery {{$artwork->image / 10}}</h4>--}}
+        <h4>Collection: {{$artwork->image}}</h4>
         <p>{{$artwork->detail}}</p>
         <div>
             <h3>
                 @foreach($artwork->categories as $category)
                     {{--Show categories linked to artwork--}}
-                    @if($category->name == 'new')
+                    @if($category->name == 'New')
                         <btn class="btn btn-primary"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
-                    @elseif ($category->name == 'recent')
+                    @elseif ($category->name == 'Recently added')
                         <btn class="btn btn-success"><a class="link page-link text-white"
                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
                     @elseif ($category->name == 'old')
                         <btn class="btn btn-warning"><a class="link page-link text-white"
-                                                       href="/categories/{{$category->id}}">{{$category->name}}</a>
+                                                        href="/categories/{{$category->id}}">{{$category->name}}</a>
                         </btn>
                     @else
                         <btn class="btn btn-dark"><a class="link page-link text-white"

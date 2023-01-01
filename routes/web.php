@@ -31,7 +31,7 @@ Route::post('/users/{user}', [UserController::class, 'update'])->name('users.upd
 Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 Route::post('/users/{user}/verify', [UserController::class, 'verifyUser'])->name('users.verify-user');
 
-//Products (Public)
+//Artworks (Public)
 Route::resource('/portfolio', ArtworkController::class)->names('artworks');
 Route::post('/portfolio/search', [ArtworkController::class, 'search'])->name('artworks.search');
 
@@ -47,8 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
     Route::post('/users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
 
-    //Products (Admin)
-    Route::post('/portfolio/{artwork}/toggle-visibility', [ArtworkController::class, 'toggleVisibility'])->name('products.toggle-visibility');
+    //Artworks (Admin)
+    Route::post('/portfolio/{artwork}/toggle-visibility', [ArtworkController::class, 'toggleVisibility'])->name('artworks.toggle-visibility');
 });
 
 

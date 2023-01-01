@@ -13,7 +13,7 @@
                 </div>
                 <br>
                 <div>
-                    <btn class="btn btn-primary"><a href="{{route('categories.index')}}" class="link page-link"><i
+                    <btn class="btn btn-primary"><a href="{{route('artworks.index')}}" class="link page-link"><i
                                 class="fa fa-arrow-left" aria-hidden="true"></i>
                         </a></btn>
                 </div>

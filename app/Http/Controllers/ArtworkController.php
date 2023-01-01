@@ -59,7 +59,6 @@ class ArtworkController extends Controller
     public function show($id)
     {
         $artwork = Artwork::find($id);
-
         return view('artwork.show', compact('artwork'));
     }
 

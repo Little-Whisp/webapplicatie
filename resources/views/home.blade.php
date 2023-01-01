@@ -17,10 +17,8 @@
                         <p>You are now logged in.</p>
                         <br>
                         <h2>Verification</h2>
-                        <p>To add art to the site the user must be verified. If you want to add an artwork
-                            you need to view <a href="/portfolio">two art pieces</a> on this site. After that the user
-                            will be able to add and edit their own artwork. A user can check their verification status at any moment on their profile
-                            in the dropdown menu.</p>
+                        <p>To add art to the site the user must be verified. View <a href="/portfolio">two art pieces</a>. After you're verified
+                            you will be able to add and edit their own artwork. You can see your verification status on your profile.</p>
                         <br>
                         <div>
                             @include('partials.header-piece', ['heroText' => 'Owner: '])

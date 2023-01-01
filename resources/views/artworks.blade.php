@@ -13,7 +13,7 @@
                 <div>
                     @can('create', \App\Models\Artwork::class)
                         <btn class="btn btn-info text-bg-info"><a href="{{route('artworks.create')}}"
-                                                                  class="link page-link">Add new
+                                                                  class="link page-">Add new
                                 Artwork</a></btn>
                     @endcan
                 </div>
