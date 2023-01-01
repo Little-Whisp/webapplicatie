@@ -25,6 +25,9 @@
                         <div>
                             @include('partials.header-piece', ['heroText' => 'Owner: '])
                         </div>
+
+                                <img src="https://cdn.discordapp.com/attachments/372804664053334016/1054006472503214150/1671365114959.jpg ">
+
                     </div>
                 </div>
             </div>

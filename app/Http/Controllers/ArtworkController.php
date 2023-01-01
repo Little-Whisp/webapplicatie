@@ -90,7 +90,7 @@ class ArtworkController extends Controller
             [
                 'name' => 'bail|required|max:255',
                 'detail' => 'bail|required|max:255',
-                'image' => 'required|image|file',
+                'image' => 'image|nullable|max:1999',
                 'user_id' => 'bail|required|exists:users,id',
                 'category_id' => 'bail|required',
                 'category_id.*' => 'bail|required|max:255|exists:categories,id'
