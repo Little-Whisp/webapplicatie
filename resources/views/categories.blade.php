@@ -12,7 +12,7 @@
                 <h2>List of Categories</h2>
                 <div>
                     @can('create', \App\Models\Category::class)
-                        <btn class="btn btn-info"><a href="{{route('categories.create')}}" class="link page-link">Add
+                        <btn class="btn btn-primary"><a href="{{route('categories.create')}}" class="link page-link">Add
                                 new category</a>
                         </btn>
                         <br>
