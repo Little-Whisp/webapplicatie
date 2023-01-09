@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Artwork')
+@section('title', 'Edit Portfolio')
 @section('content')
     @if(auth()->user()->id === $artwork->user_id && auth()->user()->isVerified() || auth()->user()->isAdmin())
         <div class="container">
@@ -7,10 +7,10 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header text-bg-primary">
-                            <h1>Edit Artwork</h1>
+                            <h1>Edit artwork</h1>
                         </div>
                         <div class="card-body">
-                            <form action="/portfolio/{{$artwork->id}}" method="POST">
+                            <form action="/portfolio/{{$artwork->id}}" method="POST" enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
                                 <input id="id"
@@ -27,12 +27,10 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <br>
-                                <label for="detail">Detail </label>
+                                <label for="detail">Detail: </label>
                                 <input id="detail"
                                        name="detail"
                                        type="text"
-                                       min="0.0"
-                                       step="0.01"
                                        value="{{old("detail", $artwork->detail)}}"
                                        class="input-group input-group-text @error("detail") is-invalid @enderror">
                                 @error("detail")
@@ -93,7 +91,7 @@
                     @can('delete', $artwork)
                         <div class="card">
                             <div class="card-header bg-warning">
-                                <h1>Delete Artwork</h1>
+                                <h1>Delete artwork</h1>
                             </div>
                             <div class="card-body">
                                 <h5>Are you sure you want to delete, {{$artwork->name}}?</h5>

@@ -34,6 +34,7 @@ Route::post('/users/{user}/verify', [UserController::class, 'verifyUser'])->name
 //Artworks (Public)
 Route::resource('/portfolio', ArtworkController::class)->names('artworks');
 Route::post('/portfolio/search', [ArtworkController::class, 'search'])->name('artworks.search');
+Route::get('/artworks/{id}', [ArtworkController::class, 'show'])->name('artworks');
 
 //Categories (Public)
 Route::resource('/categories', CategoryController::class)->names('categories');

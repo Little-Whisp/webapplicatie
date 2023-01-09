@@ -9,6 +9,7 @@
                         {{ session('alert') }}
                     </div>
                 @endif
+
                 <div class="card">
                     <div class="card-header">About</div>
                     <div class="card-body">

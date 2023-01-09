@@ -2,9 +2,9 @@
 @section('title', 'Categories')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="mb-4 col-6">
-                @if (session('alert'))
+        <div class="row g-3 mb-2">
+
+            @if (session('alert'))
                     <div class="alert alert-success" role="alert">
                         {{ session('alert') }}
                     </div>
@@ -17,10 +17,13 @@
                         </btn>
                         <br>
                     @endcan
+                </div>
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+
                     <br>
                     @foreach($categories as $category)
                         <div class="card">
-                            <div class="card-header text-bg-dark"><h1><a class="link page-link"
+                            <div class="card-header"><h1><a class="link page-link"
                                                                          href="/categories/{{$category->id}}">{{$category->name}}</a>
                                 </h1>
                                 <div class="justify-content-end row row-cols-auto">

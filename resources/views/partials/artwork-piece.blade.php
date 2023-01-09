@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="card-body">
-        <h4>Collection: {{$artwork->image}}</h4>
+        <img src="{{asset('/storage/'.$artwork->image)}}" width="300px" height="400px">
         <p>{{$artwork->detail}}</p>
         <div>
             <h3>

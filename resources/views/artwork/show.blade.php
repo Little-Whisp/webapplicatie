@@ -9,7 +9,7 @@
                     <div class="card-header text-bg-primary"><h1>{{$artwork->name}}</h1></div>
                     <div class="card-body">
                         <h3>Image: {{$artwork->image}}</h3>
-                        <h3>Gallery: {{$artwork->image / 10}}</h3>
+                        <h3>Gallery: {{$artwork->image}}</h3>
                         <h3>Detail:</h3>
 
                         <p>{{$artwork->detail}}</p>

@@ -74,6 +74,7 @@ class ArtworkController extends Controller
 
     public function create()
     {
+
         $categories = Category::all();
         return view('artwork.create', compact('categories'));
     }
@@ -89,13 +90,17 @@ class ArtworkController extends Controller
             [
                 'name' => 'bail|required|max:255',
                 'detail' => 'bail|required|max:255',
-                'image' => 'image|nullable|max:1999',
+                'image' => 'required|mimes:jpg,jpeg,png|max:4096',
                 'user_id' => 'bail|required|exists:users,id',
                 'category_id' => 'bail|required',
                 'category_id.*' => 'bail|required|max:255|exists:categories,id'
             ]);
+
+        $image = $request->file('image')->storePublicly('portfolio', 'public');
+//        $image = str_replace('chess-puzzles/', '', $image);
+        $data = array_merge($request->all(), ['user_id' => auth()->id(), 'image' => $image]);
         //Add and redirect
-        $artwork = Artwork::create($validated);
+        $artwork = Artwork::create($data);
         $artwork->categories()->attach($validated['category_id']);
         session()->flash('alert', 'Artwork successfully added.');
         return redirect('/portfolio');
@@ -116,10 +121,11 @@ class ArtworkController extends Controller
                 'id' => 'bail|required|exists:artworks',
                 'name' => 'bail|required|max:255',
                 'detail' => 'bail|required|max:255',
-                'image' => 'required|image|file',
+                'image' => 'required|mimes:jpg,jpeg,png|max:4096',
                 'category_id' => 'bail|required',
                 'category_id.*' => 'bail|required|max:255|exists:categories,id'
             ]);
+
         $artwork = Artwork::find($validated['id']);
         $artwork->name = $validated['name'];
         $artwork->detail = $validated['detail'];
